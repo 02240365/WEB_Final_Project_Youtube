@@ -3,18 +3,20 @@
 
 const express = require("express")
 const cors = require("cors")
+const helmet = require("helmet")
 const morgan = require("morgan")
 const path = require("path")
+require("dotenv").config()
 const fs = require("fs")
 const { connectDB, prisma } = require("./config/database")
 
 // Import routes
 const authRoutes = require("./routes/auth")
-const videosRoutes = require("./routes/videos")
-const commentsRoutes = require("./routes/comments")
-const channelsRoutes = require("./routes/channels")
+const videoRoutes = require("./routes/videos")
+const userRoutes = require("./routes/users")
+const commentRoutes = require("./routes/comments")
+const channelRoutes = require("./routes/channels")
 const searchRoutes = require("./routes/search")
-const usersRoutes = require("./routes/users")
 
 // Import middleware
 const errorHandler = require("./middleware/errorHandler")
@@ -23,12 +25,34 @@ const errorHandler = require("./middleware/errorHandler")
 const app = express()
 const PORT = process.env.PORT || 5001
 
+// Security middleware
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    contentSecurityPolicy: false, // Disable for development
+  }),
+)
+
+// CORS configuration for production
+const corsOptions = {
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    process.env.FRONTEND_URL,
+    "https://youtube-clone-frontend.onrender.com", // Add your frontend URL
+  ].filter(Boolean),
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}
+
+app.use(cors(corsOptions))
+
 // Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, "../public/uploads")
 const videosDir = path.join(uploadsDir, "videos")
 const thumbnailsDir = path.join(uploadsDir, "thumbnails")
 const avatarsDir = path.join(uploadsDir, "avatars")
-
 // Create directories if they don't exist
 ;[uploadsDir, videosDir, thumbnailsDir, avatarsDir].forEach((dir) => {
   if (!fs.existsSync(dir)) {
@@ -37,24 +61,30 @@ const avatarsDir = path.join(uploadsDir, "avatars")
   }
 })
 
-// Middleware
+// Logging
+app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"))
+
+// Body parsing middleware
+app.use(express.json({ limit: "50mb" }))
+app.use(express.urlencoded({ extended: true, limit: "50mb" }))
+
+// Serve static files (uploaded videos and thumbnails)
 app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    credentials: true,
+  "/uploads",
+  express.static(path.join(__dirname, "../public/uploads"), {
+    maxAge: "1d",
+    etag: true,
   }),
 )
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(morgan("dev"))
-
-// Serve static files
-app.use("/uploads", express.static(path.join(__dirname, "../public/uploads")))
-app.use(express.static(path.join(__dirname, "../public")))
 
 // Health check endpoint
 app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok", message: "Server is running" })
+  res.json({
+    status: "OK",
+    message: "YouTube Clone API is running",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+  })
 })
 
 // API status endpoint
@@ -131,41 +161,57 @@ app.get("/test-file/:folder/:filename", (req, res) => {
   }
 })
 
-// Routes
+// API routes
 app.use("/api/auth", authRoutes)
-app.use("/api/videos", videosRoutes)
-app.use("/api/comments", commentsRoutes)
-app.use("/api/channels", channelsRoutes)
+app.use("/api/videos", videoRoutes)
+app.use("/api/users", userRoutes)
+app.use("/api/comments", commentRoutes)
+app.use("/api/channels", channelRoutes)
 app.use("/api/search", searchRoutes)
-app.use("/api/users", usersRoutes)
 
-// Error handling middleware
+// Root endpoint
+app.get("/", (req, res) => {
+  res.json({
+    message: "YouTube Clone API",
+    version: "1.0.0",
+    endpoints: {
+      health: "/health",
+      auth: "/api/auth",
+      videos: "/api/videos",
+      users: "/api/users",
+      comments: "/api/comments",
+      channels: "/api/channels",
+      search: "/api/search",
+    },
+  })
+})
+
+// 404 handler
+app.use("*", (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route ${req.originalUrl} not found`,
+  })
+})
+
+// Global error handler
 app.use(errorHandler)
 
 // Start server
-async function startServer() {
-  console.log("Starting server...")
-  console.log("Environment:", process.env.NODE_ENV)
-  console.log("Database URL:", process.env.DATABASE_URL ? "Set (hidden for security)" : "Not set")
+const server = app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server running on port ${PORT}`)
+  console.log(`📱 Environment: ${process.env.NODE_ENV || "development"}`)
+  console.log(`🌐 Frontend URL: ${process.env.FRONTEND_URL || "http://localhost:3000"}`)
+  console.log(`🔗 API URL: http://localhost:${PORT}`)
+})
 
-  const isConnected = await connectDB()
-
-  if (isConnected) {
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`)
-      console.log(`📁 Uploads directory: ${uploadsDir}`)
-      console.log(`🌐 API available at http://localhost:${PORT}/api`)
-    })
-  } else {
-    console.error("❌ Failed to start server due to database connection error")
-    process.exit(1)
-  }
-}
+// Graceful shutdown
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received, shutting down gracefully")
+  server.close(() => {
+    console.log("Process terminated")
+  })
+})
 
 // Export for testing
-module.exports = { app, prisma, connectDB }
-
-// Start server if this file is run directly
-if (require.main === module) {
-  startServer()
-}
+module.exports = app
