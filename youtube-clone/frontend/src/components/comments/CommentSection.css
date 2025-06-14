@@ -1,0 +1,107 @@
+/* CommentSection styles */
+.comment-section {
+  margin-top: 24px;
+}
+
+.comment-section__title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.comment-section__form-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.comment-section__user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.comment-section__user-avatar--placeholder {
+  background-color: #303030;
+}
+
+.comment-section__form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-section__input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #303030;
+  padding: 8px 0;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.comment-section__input:focus {
+  outline: none;
+  border-bottom-color: #3ea6ff;
+}
+
+.comment-section__input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.comment-section__form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.comment-section__cancel-btn,
+.comment-section__submit-btn {
+  padding: 8px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.comment-section__cancel-btn {
+  background-color: transparent;
+  color: #aaa;
+}
+
+.comment-section__cancel-btn:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.comment-section__submit-btn {
+  background-color: #3ea6ff;
+  color: #0f0f0f;
+}
+
+.comment-section__submit-btn:hover:not(:disabled) {
+  background-color: #65b8ff;
+}
+
+.comment-section__cancel-btn:disabled,
+.comment-section__submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.comment-section__list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.comment-section__no-comments {
+  color: #aaa;
+  font-size: 14px;
+  text-align: center;
+  padding: 24px 0;
+}

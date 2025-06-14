@@ -1,0 +1,183 @@
+/* Register page styles */
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 56px);
+  padding: 20px;
+}
+
+.register__container {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.register__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.register__title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.register__subtitle {
+  color: #aaa;
+  font-size: 16px;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.register__error-message {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: #ff6b6b;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.register__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.register__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.register__label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #ccc;
+}
+
+.register__input {
+  background-color: #2a2a2a;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  color: white;
+  transition: border-color 0.2s;
+}
+
+.register__input:focus {
+  outline: none;
+  border-color: #3ea6ff;
+}
+
+.register__input--error {
+  border-color: #ff6b6b;
+}
+
+.register__input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.register__field-error {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.register__checkbox-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.register__checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.register__checkbox {
+  margin-top: 2px;
+  accent-color: #3ea6ff;
+}
+
+.register__checkbox-text {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+.register__submit-btn {
+  background-color: #3ea6ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.register__submit-btn:hover:not(:disabled) {
+  background-color: #65b8ff;
+}
+
+.register__submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.register__footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #404040;
+}
+
+.register__footer-text {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.register__footer-link {
+  color: #3ea6ff;
+  text-decoration: none;
+}
+
+.register__footer-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .register__container {
+    padding: 24px;
+  }
+
+  .register__row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .register__title {
+    font-size: 20px;
+  }
+
+  .register__subtitle {
+    font-size: 14px;
+  }
+}
