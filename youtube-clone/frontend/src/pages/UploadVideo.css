@@ -1,0 +1,354 @@
+/* UploadVideo page styles */
+.upload-video {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.upload-video__container {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.upload-video__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.upload-video__title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.upload-video__subtitle {
+  color: #aaa;
+  font-size: 16px;
+}
+
+.upload-video__form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.upload-video__section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.upload-video__section-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.upload-video__drop-zone {
+  border: 2px dashed #404040;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.upload-video__drop-zone--active {
+  border-color: #3ea6ff;
+  background-color: rgba(62, 166, 255, 0.1);
+}
+
+.upload-video__drop-zone--has-file {
+  border-color: #4caf50;
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.upload-video__drop-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload-video__drop-icon {
+  font-size: 48px;
+  opacity: 0.7;
+}
+
+.upload-video__drop-text {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.upload-video__file-label {
+  color: #3ea6ff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.upload-video__drop-hint {
+  font-size: 14px;
+  color: #888;
+}
+
+.upload-video__file-input {
+  display: none;
+}
+
+.upload-video__file-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.upload-video__file-icon {
+  font-size: 32px;
+}
+
+.upload-video__file-details {
+  flex: 1;
+}
+
+.upload-video__file-name {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.upload-video__file-size {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.upload-video__remove-file {
+  background: rgba(255, 0, 0, 0.2);
+  border: none;
+  color: #ff6b6b;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.upload-video__thumbnail-upload {
+  width: 200px;
+}
+
+.upload-video__thumbnail-label {
+  display: block;
+  cursor: pointer;
+}
+
+.upload-video__thumbnail-preview {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.upload-video__thumbnail-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.upload-video__thumbnail-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  color: white;
+  font-size: 14px;
+}
+
+.upload-video__thumbnail-preview:hover .upload-video__thumbnail-overlay {
+  opacity: 1;
+}
+
+.upload-video__thumbnail-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  border: 2px dashed #404040;
+  border-radius: 8px;
+  gap: 8px;
+  color: #aaa;
+  transition: border-color 0.3s;
+}
+
+.upload-video__thumbnail-placeholder:hover {
+  border-color: #3ea6ff;
+}
+
+.upload-video__thumbnail-icon {
+  font-size: 24px;
+}
+
+.upload-video__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-video__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.upload-video__label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.upload-video__input,
+.upload-video__textarea,
+.upload-video__select {
+  background-color: #2a2a2a;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  color: white;
+  transition: border-color 0.2s;
+}
+
+.upload-video__input:focus,
+.upload-video__textarea:focus,
+.upload-video__select:focus {
+  outline: none;
+  border-color: #3ea6ff;
+}
+
+.upload-video__input--error,
+.upload-video__textarea--error,
+.upload-video__select--error {
+  border-color: #ff6b6b;
+}
+
+.upload-video__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.upload-video__char-count {
+  font-size: 12px;
+  color: #888;
+  text-align: right;
+}
+
+.upload-video__hint {
+  font-size: 12px;
+  color: #888;
+}
+
+.upload-video__error {
+  color: #ff6b6b;
+  font-size: 12px;
+}
+
+.upload-video__progress {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.upload-video__progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #404040;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.upload-video__progress-fill {
+  height: 100%;
+  background-color: #3ea6ff;
+  transition: width 0.3s ease;
+}
+
+.upload-video__progress-text {
+  text-align: center;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.upload-video__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid #404040;
+}
+
+.upload-video__cancel-btn,
+.upload-video__submit-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.upload-video__cancel-btn {
+  background-color: transparent;
+  border: 1px solid #404040;
+  color: #ccc;
+}
+
+.upload-video__cancel-btn:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.upload-video__submit-btn {
+  background-color: #3ea6ff;
+  border: none;
+  color: white;
+}
+
+.upload-video__submit-btn:hover:not(:disabled) {
+  background-color: #65b8ff;
+}
+
+.upload-video__cancel-btn:disabled,
+.upload-video__submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .upload-video {
+    padding: 10px;
+  }
+
+  .upload-video__container {
+    padding: 20px;
+  }
+
+  .upload-video__row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .upload-video__actions {
+    flex-direction: column;
+  }
+
+  .upload-video__cancel-btn,
+  .upload-video__submit-btn {
+    width: 100%;
+  }
+}

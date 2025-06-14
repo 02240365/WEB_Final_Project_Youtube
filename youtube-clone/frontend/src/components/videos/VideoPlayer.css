@@ -1,0 +1,132 @@
+.video-player-container {
+  width: 100%;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #000;
+}
+
+.video-player-error,
+.video-player-loading {
+  width: 100%;
+  height: 100%;
+  background: #181818;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  aspect-ratio: 16 / 9;
+}
+
+.error-content,
+.loading-content {
+  text-align: center;
+  padding: 20px;
+  max-width: 400px;
+}
+
+.error-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.error-content h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.error-content p {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+.debug-info {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 6px;
+  margin: 12px 0;
+  font-family: monospace;
+  font-size: 11px;
+  text-align: left;
+}
+
+.debug-info p {
+  margin: 2px 0;
+  word-break: break-all;
+}
+
+.retry-button {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background-color 0.2s ease;
+}
+
+.retry-button:hover {
+  background: #cc0000;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #ff0000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-content p {
+  color: #aaa;
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.loading-url {
+  font-family: monospace;
+  font-size: 10px;
+  word-break: break-all;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px;
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .error-content,
+  .loading-content {
+    padding: 16px;
+  }
+
+  .error-content h3 {
+    font-size: 16px;
+  }
+
+  .error-content p {
+    font-size: 13px;
+  }
+}
